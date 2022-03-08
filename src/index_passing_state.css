@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+.box {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  display: inline-block;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: red;
+}
