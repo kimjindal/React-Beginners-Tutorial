@@ -1,57 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import GameBoard from './components/GameBoard';
+import SecretWord from './components/SecretWord';
 
-import MovieCard from './MovieCard';
-import SearchIcon from './search.svg';
-import './App.css';
+export default function App() {
+    const [secretWord, setSecretWord] = useState('');
+    const [start, setStart] = useState(false);
 
-const API_URL = 'http://www.omdbapi.com?apikey=a55cdfb4';
+    function changeHandler(e) {
+        setSecretWord(prevSecretWord => e.target.value);
+    }
 
-const App = () => {
-  const [movies, setMovies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+    function clickHandler() {
+        setStart(prevStart => !prevStart);
+    }
 
-  const searchMovies = async title => {
-    const response = await fetch(`${API_URL}&s=${title}`);
-    const data = await response.json();
-
-    setMovies(data.Search);
-  };
-
-  useEffect(() => {
-    searchMovies('superman');
-  }, []);
-
-  return (
-    <div className="app">
-      <h1>MovieLand</h1>
-
-      <div className="search">
-        <input
-          placeholder="Search for movies"
-          value={searchTerm}
-          onChange={e => {
-            setSearchTerm(e.target.value);
-          }}
-        />
-        <img
-          src={SearchIcon}
-          alt="search"
-          onClick={() => searchMovies(searchTerm)}
-        />
-      </div>
-      {movies.length > 0 ? (
-        <div className="container">
-          {movies.map(movie => (
-            <MovieCard movie={movie} />
-          ))}
+    return (
+        <div>
+            <h1>Welcome to Hangman!</h1>
+            {!start ? (
+                <SecretWord
+                    secretWord={secretWord}
+                    changeHandler={changeHandler}
+                    clickHandler={clickHandler}
+                />
+            ) : (
+                <GameBoard secretWord={secretWord.toUpperCase()} />
+            )}
         </div>
-      ) : (
-        <div className="empty">
-          <h2>No movies found</h2>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default App;
+    );
+}

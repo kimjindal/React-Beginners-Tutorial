@@ -1,5 +1,5 @@
 import React from 'react';
-import boxes from './boxes';
+import boxes from './data/boxes';
 import Box from './components/Box';
 
 export default function App() {
@@ -8,7 +8,7 @@ export default function App() {
   console.log('App rendered', squares);
 
   function toggle(id) {
-    setSquares((prevSquares) => {
+    setSquares(prevSquares => {
       /*
       const newSquares = [];
       for (let i = 0; i < prevSquares.length; i++) {
@@ -22,17 +22,17 @@ export default function App() {
         }
       }
       return newSquares;
-*/
-      return prevSquares.map((square) => {
+      */
+      return prevSquares.map(square => {
         return square.id === id ? { ...square, on: !square.on } : square;
       });
     });
   }
 
-  const squareElements = squares.map((square) => (
+  const squareElements = squares.map(square => (
     <Box
       key={square.id}
-      id={square.id}
+      /* id={square.id} */
       on={square.on}
       toggle={() => toggle(square.id)}
     />
