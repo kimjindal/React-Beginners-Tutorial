@@ -14,7 +14,7 @@ export default function GameBoard({ secretWord }) {
             letter,
         ]);
 
-        const correctClick = secretWord.indexOf(letter) > -1 ? 1 : 0;
+        const correctClick = secretWord.split(letter).length - 1;
         setCorrect(prevCorrect => prevCorrect + correctClick);
 
         const wrongClick = secretWord.indexOf(letter) === -1 ? 1 : 0;

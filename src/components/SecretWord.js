@@ -3,6 +3,7 @@ import React from 'react';
 export default function SecretWord({
     secretWord,
     changeHandler,
+    keyUpHandler,
     clickHandler,
 }) {
     return (
@@ -13,6 +14,7 @@ export default function SecretWord({
                     type="text"
                     value={secretWord}
                     onChange={changeHandler}
+                    onKeyUp={keyUpHandler}
                     name="word"
                     placeholder="Enter a secret word"
                 />

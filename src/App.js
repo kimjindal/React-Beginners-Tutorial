@@ -7,7 +7,11 @@ export default function App() {
     const [start, setStart] = useState(false);
 
     function changeHandler(e) {
-        setSecretWord(prevSecretWord => e.target.value);
+        setSecretWord(prevSecretWord => (prevSecretWord = e.target.value));
+    }
+
+    function keyUpHandler(e) {
+        if (e.keyCode === 13) clickHandler();
     }
 
     function clickHandler() {
@@ -21,6 +25,7 @@ export default function App() {
                 <SecretWord
                     secretWord={secretWord}
                     changeHandler={changeHandler}
+                    keyUpHandler={keyUpHandler}
                     clickHandler={clickHandler}
                 />
             ) : (
